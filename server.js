@@ -52,6 +52,19 @@ app.post("/api/pills", (req, res) => {
   });
 });
 
+app.get("/api/pills", (req, res) => {
+  const query = "select * from pills;";
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error("Error inserting data:", error);
+      res.status(500).send("Error inserting data");
+    } else {
+      console.log("", results);
+      res.status(200).send("");
+    }
+  });
+});
+
 connection.connect((err) => {
   if (err) {
     console.error("Error connecting to database:", err);

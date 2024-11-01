@@ -4,18 +4,6 @@ $(function () {
     amount: $("#amount").val(),
   };
 
-  // $.ajax({
-  //   type: "GET",
-  //   url: "/api/pills",
-  //   data: data,
-  //   success: function (response) {
-  //     console.log("Data retrieved successfully:", response);
-  //   },
-  //   error: function (error) {
-  //     console.error("Error inserting data:", error);
-  //   },
-  // });
-
   fetchData();
 
   function fetchData() {

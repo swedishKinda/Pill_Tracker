@@ -59,8 +59,8 @@ app.get("/api/pills", (req, res) => {
       console.error("Error inserting data:", error);
       res.status(500).send("Error inserting data");
     } else {
-      console.log("", results);
-      res.status(200).send("");
+      console.log("Data retrieved successfully: ", results);
+      res.status(200).send(results);
     }
   });
 });

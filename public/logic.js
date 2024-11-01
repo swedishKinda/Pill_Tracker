@@ -16,9 +16,7 @@ $(function () {
   //   },
   // });
 
-  $("#fetch-button").click(function () {
-    fetchData();
-  });
+  fetchData();
 
   function fetchData() {
     $.ajax({
@@ -39,7 +37,9 @@ $(function () {
     container.empty(); // Clear previous content
 
     $.each(data, function (index, item) {
-      const div = $("<div></div>").text(`Name: ${item.name}, Amount: ${item.amount}`);
+      const div = $("<div></div>").text(
+        `Name: ${item.name}, Amount: ${item.amount}`
+      );
       container.append(div);
     });
   }
@@ -61,5 +61,7 @@ $(function () {
         console.error("Error inserting data:", error);
       },
     });
+
+    fetchData();
   });
 });

@@ -26,7 +26,7 @@ $(function () {
 
     $.each(data, function (index, item) {
       const div = $("<div></div>").text(
-        `Name: ${item.name}, Amount: ${item.amount}`
+        `${item.name}, ${item.amount}`
       );
       container.append(div);
     });

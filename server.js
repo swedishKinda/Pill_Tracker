@@ -37,20 +37,20 @@ connection.connect();
 
 app.use(express.json());
 
-app.post("/api/pills", (req, res) => {
-  const { name, amount } = req.body;
+// app.post("/api/pills", (req, res) => {
+//   const { name, amount } = req.body;
 
-  const query = "INSERT INTO pills (name, amount) VALUES ('y', 2)";
-  connection.query(query, [name, amount], (error, results) => {
-    if (error) {
-      console.error("Error inserting data:", error);
-      res.status(500).send("Error inserting data");
-    } else {
-      console.log("Data inserted successfully:", results);
-      res.status(200).send("Data inserted successfully");
-    }
-  });
-});
+//   const query = "INSERT INTO pills (name, amount) VALUES ('y', 2)";
+//   connection.query(query, [name, amount], (error, results) => {
+//     if (error) {
+//       console.error("Error inserting data:", error);
+//       res.status(500).send("Error inserting data");
+//     } else {
+//       console.log("Data inserted successfully:", results);
+//       res.status(200).send("Data inserted successfully");
+//     }
+//   });
+// });
 
 app.get("/api/pills", (req, res) => {
   const query = "select * from pills;";
@@ -62,6 +62,15 @@ app.get("/api/pills", (req, res) => {
       console.log("Data retrieved successfully: ", results);
       res.status(200).send(results);
     }
+  });
+});
+
+app.post("/submit", (req, res) => {
+  const { name, amount } = req.body;
+  const sql = "INSERT INTO pills (name, amount) VALUES (?, ?)";
+  connection.query(sql, [name, amount], (err, result) => {
+    if (err) throw err;
+    res.send("Data inserted...");
   });
 });
 

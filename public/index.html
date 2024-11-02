@@ -25,17 +25,26 @@
   <body>
     <p>hello world</p>
 
-    <button id="button">Click me</button>
+    <!-- <button id="button">Click me</button> -->
 
-    <table class="table text-center mx-auto">
-      <thead>
-        <th>Name</th>
-        <th>Amount</th>
-      </thead>
-      <tbody id="data-container"></tbody>
-    </table>
-
-    <!-- <div id="data-container"></div> -->
+    <section class="row middle-xs center-xs">
+      <div class="col-md-6 col-xs-12">
+        <form id="myForm">
+          <input type="text" name="name" placeholder="Name" required />
+          <input type="number" name="amount" placeholder="Amount" required />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <table class="table text-center mx-auto">
+          <thead>
+            <th>Name</th>
+            <th>Amount</th>
+          </thead>
+          <tbody id="data-container"></tbody>
+        </table>
+      </div>
+    </section>
 
     <script src="logic.js"></script>
   </body>

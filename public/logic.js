@@ -4,6 +4,28 @@ $(function () {
     amount: $("#amount").val(),
   };
 
+  $("#myForm").on("submit", function (event) {
+    event.preventDefault();
+    const formData = {
+      name: $('input[name="name"]').val(),
+      email: $('input[name="amount"]').val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: 'http://localhost:3000/submit',
+      data: JSON.stringify(formData),
+      contentType: "application/json",
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (error) {
+        console.error("Error:", error);
+      },
+    });
+    fetchData();
+  });
+
   fetchData();
 
   function fetchData() {
@@ -33,24 +55,24 @@ $(function () {
     });
   }
 
-  $("#button").on("click", function () {
-    var data = {
-      name: $("#name").val(),
-      amount: $("#amount").val(),
-    };
+  // $("#button").on("click", function () {
+  //   var data = {
+  //     name: $("#name").val(),
+  //     amount: $("#amount").val(),
+  //   };
 
-    $.ajax({
-      type: "POST",
-      url: "/api/pills",
-      data: data,
-      success: function (response) {
-        console.log("Data inserted successfully:", response);
-      },
-      error: function (error) {
-        console.error("Error inserting data:", error);
-      },
-    });
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "/api/pills",
+  //     data: data,
+  //     success: function (response) {
+  //       console.log("Data inserted successfully:", response);
+  //     },
+  //     error: function (error) {
+  //       console.error("Error inserting data:", error);
+  //     },
+  //   });
 
-    fetchData();
-  });
+  //   fetchData();
+  // });
 });

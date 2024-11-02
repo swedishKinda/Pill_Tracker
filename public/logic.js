@@ -8,7 +8,7 @@ $(function () {
     event.preventDefault();
     const formData = {
       name: $('input[name="name"]').val(),
-      email: $('input[name="amount"]').val(),
+      amount: $('input[name="amount"]').val(),
     };
 
     $.ajax({

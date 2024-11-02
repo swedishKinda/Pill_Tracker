@@ -13,7 +13,7 @@ $(function () {
 
     $.ajax({
       type: "POST",
-      url: 'http://localhost:3000/submit',
+      url: "http://localhost:3000/submit",
       data: JSON.stringify(formData),
       contentType: "application/json",
       success: function (response) {
@@ -42,6 +42,8 @@ $(function () {
     });
   }
 
+  let counter = 1;
+
   function displayData(data) {
     const container = $("#data-container");
     container.empty(); // Clear previous content
@@ -49,11 +51,33 @@ $(function () {
     $.each(data, function (index, item) {
       $("#data-container").append(
         `
-        <tr><td>${item.name}</td><td>${item.amount}</td></tr>
+        <tr><td>${item.name}</td><td>${
+          item.amount
+        }</td><td><button class="delete-button" data-index="${counter++}">X</button></tr>
         `
       );
     });
   }
+
+  $("#data-container").on("click", ".delete-button", function () {
+    const id = $(this).data("index"); // Get the index from the button
+    console.log("Deleting item with ID:", id);
+
+    $.ajax({
+      url: `/api/pills/${id}`, // Replace with your actual API endpoint
+      type: "DELETE",
+      success: function (response) {
+        // Optionally, you can handle the response
+        console.log("Item deleted successfully:", response);
+        // Refresh the data display
+        fetchData(); // Call a function to refresh your data
+      },
+      error: function (error) {
+        console.error("Error deleting item:", error);
+        alert("Could not delete the item. Please try again.");
+      },
+    });
+  });
 
   // $("#button").on("click", function () {
   //   var data = {

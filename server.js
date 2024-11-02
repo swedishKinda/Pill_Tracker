@@ -74,6 +74,20 @@ app.post("/submit", (req, res) => {
   });
 });
 
+app.delete('/api/delete/:id', (req, res) => {
+  const id = req.params.id; // Extract the id from the URL
+
+  // Assuming you're using a database library like Sequelize or raw SQL
+  const query = 'DELETE FROM pills WHERE id = ?'; // Use your actual table name
+
+  connection.query(query, [id], (error, results) => {
+      if (error) {
+          return res.status(500).send('Error deleting item');
+      }
+      res.status(200).send('Item deleted successfully');
+  });
+});
+
 connection.connect((err) => {
   if (err) {
     console.error("Error connecting to database:", err);

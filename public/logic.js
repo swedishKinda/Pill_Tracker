@@ -25,10 +25,11 @@ $(function () {
     container.empty(); // Clear previous content
 
     $.each(data, function (index, item) {
-      const div = $("<div></div>").text(
-        `${item.name}, ${item.amount}`
+      $("#data-container").append(
+        `
+        <tr><td>${item.name}</td><td>${item.amount}</td></tr>
+        `
       );
-      container.append(div);
     });
   }
 

@@ -74,7 +74,7 @@ app.post("/submit", (req, res) => {
   });
 });
 
-app.delete('/api/delete/:id', (req, res) => {
+app.delete('/api/pills/:id', (req, res) => {
   const id = req.params.id; // Extract the id from the URL
 
   // Assuming you're using a database library like Sequelize or raw SQL

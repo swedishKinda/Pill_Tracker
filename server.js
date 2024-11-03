@@ -16,6 +16,7 @@ app.use(express.static("public"));
 // Define a route for the root path ('/')
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
+  res.sendFile(__dirname + "/public/delete_med.html");
 });
 
 const port = 3000;
@@ -65,7 +66,7 @@ app.get("/api/pills", (req, res) => {
   });
 });
 
-app.post("/submit", (req, res) => {
+app.post("/submit1", (req, res) => {
   const { name, amount } = req.body;
   const sql = "INSERT INTO pills (name, amount) VALUES (?, ?)";
   connection.query(sql, [name, amount], (err, result) => {
@@ -74,33 +75,32 @@ app.post("/submit", (req, res) => {
   });
 });
 
-app.delete('/api/pills/:id', (req, res) => {
-  const id = req.params.id; // Extract the id from the URL
+app.delete("/submit2", (req, res) => {
+  const { name2 } = req.body;
+  const sql = "DELETE FROM pills WHERE name = ?";
 
   // Assuming you're using a database library like Sequelize or raw SQL
-  const query = 'DELETE FROM pills WHERE id = ?'; // Use your actual table name
-
-  connection.query(query, [id], (error, results) => {
-      if (error) {
-          return res.status(500).send('Error deleting item');
-      }
-      res.status(200).send('Item deleted successfully');
+  connection.query(sql, [name2], (error, results) => {
+    if (error) {
+      return res.status(500).send("Error deleting items");
+    }
+    res.status(200).send("Items deleted successfully");
   });
 });
 
-app.delete('/api/pills', (req, res) => {
-  const id = req.params.id; // Extract the id from the URL
+// app.delete('/api/pills', (req, res) => {
+//   const id = req.params.id; // Extract the id from the URL
 
-  // Assuming you're using a database library like Sequelize or raw SQL
-  const query = 'DELETE FROM pills'; // Use your actual table name
+//   // Assuming you're using a database library like Sequelize or raw SQL
+//   const query = 'DELETE FROM pills'; // Use your actual table name
 
-  connection.query(query, [id], (error, results) => {
-      if (error) {
-          return res.status(500).send('Error deleting items');
-      }
-      res.status(200).send('Items deleted successfully');
-  });
-});
+//   connection.query(query, [id], (error, results) => {
+//       if (error) {
+//           return res.status(500).send('Error deleting items');
+//       }
+//       res.status(200).send('Items deleted successfully');
+//   });
+// });
 
 connection.connect((err) => {
   if (err) {

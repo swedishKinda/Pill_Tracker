@@ -16,7 +16,6 @@ app.use(express.static("public"));
 // Define a route for the root path ('/')
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
-  res.sendFile(__dirname + "/public/delete_med.html");
 });
 
 const port = 3000;
@@ -76,15 +75,12 @@ app.post("/submit1", (req, res) => {
 });
 
 app.delete("/submit2", (req, res) => {
-  const { name2 } = req.body;
-  const sql = "DELETE FROM pills WHERE name = ?";
+  const { name } = req.body;
+  const sql = 'delete from pills where name=?';
 
-  // Assuming you're using a database library like Sequelize or raw SQL
-  connection.query(sql, [name2], (error, results) => {
-    if (error) {
-      return res.status(500).send("Error deleting items");
-    }
-    res.status(200).send("Items deleted successfully");
+  connection.query(sql, name, (err, res) => {
+    // if (err) throw err;
+    // res.send("Data deleted...");
   });
 });
 

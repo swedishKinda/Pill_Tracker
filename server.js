@@ -23,17 +23,39 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-const mysql = require("mysql2");
+const { Client } = require("pg");
 
-const connection = mysql.createConnection({
-  host: "127.0.0.1",
-  port: 3306,
-  user: "root",
-  password: "password",
-  database: "pillTracker",
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-connection.connect();
+client.connect();
+
+client.query(
+  "SELECT table_schema,table_name FROM information_schema.tables;",
+  (err, res) => {
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    client.end();
+  }
+);
+
+// const mysql = require("mysql2");
+
+// const connection = mysql.createConnection({
+//   host: "127.0.0.1",
+//   port: 3306,
+//   user: "root",
+//   password: "password",
+//   database: "pillTracker",
+// });
+
+// connection.connect();
 
 app.use(express.json());
 
@@ -76,7 +98,7 @@ app.post("/submit1", (req, res) => {
 
 app.delete("/submit2", (req, res) => {
   const { name } = req.body;
-  const sql = 'delete from pills where name=?';
+  const sql = "delete from pills where name=?";
 
   connection.query(sql, name, (err, res) => {
     // if (err) throw err;

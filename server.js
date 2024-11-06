@@ -120,10 +120,10 @@ app.delete("/submit2", (req, res) => {
 //   });
 // });
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to database:", err);
-    return;
-  }
-  console.log("Connected to database!");
-});
+// connection.connect((err) => {
+//   if (err) {
+//     console.error("Error connecting to database:", err);
+//     return;
+//   }
+//   console.log("Connected to database!");
+// });

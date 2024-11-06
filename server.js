@@ -25,23 +25,23 @@ app.listen(port, () => {
 
 const { Client } = require("pg");
 
-const client = new Client({
+const connection = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-client.connect();
+connection.connect();
 
-client.query(
+connection.query(
   "SELECT table_schema,table_name FROM information_schema.tables;",
   (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
     }
-    client.end();
+    connection.end();
   }
 );
 
@@ -106,19 +106,19 @@ app.delete("/submit2", (req, res) => {
   });
 });
 
-// app.delete('/api/pills', (req, res) => {
-//   const id = req.params.id; // Extract the id from the URL
+app.delete('/api/pills', (req, res) => {
+  const id = req.params.id; // Extract the id from the URL
 
-//   // Assuming you're using a database library like Sequelize or raw SQL
-//   const query = 'DELETE FROM pills'; // Use your actual table name
+  // Assuming you're using a database library like Sequelize or raw SQL
+  const query = 'DELETE FROM pills'; // Use your actual table name
 
-//   connection.query(query, [id], (error, results) => {
-//       if (error) {
-//           return res.status(500).send('Error deleting items');
-//       }
-//       res.status(200).send('Items deleted successfully');
-//   });
-// });
+  connection.query(query, [id], (error, results) => {
+      if (error) {
+          return res.status(500).send('Error deleting items');
+      }
+      res.status(200).send('Items deleted successfully');
+  });
+});
 
 // connection.connect((err) => {
 //   if (err) {

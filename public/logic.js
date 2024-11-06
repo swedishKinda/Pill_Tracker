@@ -110,19 +110,19 @@ $(function () {
   //   });
   // });
 
-  // $("#clear").on("click", function () {
-  //   $.ajax({
-  //     type: "DELETE",
-  //     url: "/api/pills",
-  //     data: data,
-  //     success: function (response) {
-  //       console.log("Data deleted successfully:", response);
-  //     },
-  //     error: function (error) {
-  //       console.error("Error deleting data:", error);
-  //     },
-  //   });
+  $("#clear").on("click", function () {
+    $.ajax({
+      type: "DELETE",
+      url: "/api/pills",
+      data: data,
+      success: function (response) {
+        console.log("Data deleted successfully:", response);
+      },
+      error: function (error) {
+        console.error("Error deleting data:", error);
+      },
+    });
 
-  //   fetchData();
-  // });
+    fetchData();
+  });
 });

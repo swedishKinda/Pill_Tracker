@@ -18,10 +18,10 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-port = process.env.port || 3000;
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// port = process.env.port || 3000;
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
 
 const { Client } = require("pg");
 

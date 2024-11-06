@@ -4,5 +4,16 @@
     "jquery": "^3.7.1",
     "jsdom": "^25.0.1",
     "mysql2": "^3.11.3"
-  }
+  },
+  "name": "pill_tracker",
+  "version": "1.0.0",
+  "description": "pill_tracker",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
 }

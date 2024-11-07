@@ -57,7 +57,7 @@ $(function () {
 
   function fetchData() {
     $.ajax({
-      url: "/api/pills",
+      url: "postgres://udaendc20npfup:pe119b7c2a6aba549de38a2d3d07bc7c9340ed7f94166ff0316512b194883a611@c3cj4hehegopde.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/df3d3ojlucpms8/pills",
       method: "GET",
       dataType: "json",
       success: function (data) {
@@ -113,7 +113,7 @@ $(function () {
   $("#clear").on("click", function () {
     $.ajax({
       type: "DELETE",
-      url: "/api/pills",
+      url: "postgres://udaendc20npfup:pe119b7c2a6aba549de38a2d3d07bc7c9340ed7f94166ff0316512b194883a611@c3cj4hehegopde.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/df3d3ojlucpms8/pills",
       data: data,
       success: function (response) {
         console.log("Data deleted successfully:", response);

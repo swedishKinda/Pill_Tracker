@@ -74,7 +74,7 @@ app.use(express.json());
 //   });
 // });
 
-app.get("/api/pills", (req, res) => {
+app.get("/", (req, res) => {
   const query = "select * from pills;";
   connection.query(query, (error, results) => {
     if (error) {
@@ -106,7 +106,7 @@ app.delete("/submit2", (req, res) => {
   });
 });
 
-app.delete('/api/pills', (req, res) => {
+app.delete('/', (req, res) => {
   const id = req.params.id; // Extract the id from the URL
 
   // Assuming you're using a database library like Sequelize or raw SQL

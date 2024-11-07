@@ -14,7 +14,7 @@ $(function () {
     // if ($(this).attr("value") == "button-1") {
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/submit1",
+        url: "/submit1",
         data: JSON.stringify(formData),
         contentType: "application/json",
         success: function (response) {
@@ -38,7 +38,7 @@ $(function () {
     // if ($(this).attr("value") == "button-2") {
       $.ajax({
         type: "DELETE",
-        url: "http://localhost:3000/submit2",
+        url: "/submit2",
         data: JSON.stringify(formData),
         contentType: "application/json",
         success: function (response) {
@@ -57,7 +57,7 @@ $(function () {
 
   function fetchData() {
     $.ajax({
-      url: "/api/pills",
+      url: "/",
       method: "GET",
       dataType: "json",
       success: function (data) {
@@ -113,7 +113,7 @@ $(function () {
   $("#clear").on("click", function () {
     $.ajax({
       type: "DELETE",
-      url: "/api/pills",
+      url: "/",
       data: data,
       success: function (response) {
         console.log("Data deleted successfully:", response);

@@ -74,7 +74,7 @@ app.use(express.json());
 //   });
 // });
 
-app.get("postgres://udaendc20npfup:pe119b7c2a6aba549de38a2d3d07bc7c9340ed7f94166ff0316512b194883a611@c3cj4hehegopde.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/df3d3ojlucpms8/pills", (req, res) => {
+app.get("/api/pills", (req, res) => {
   const query = "select * from pills;";
   connection.query(query, (error, results) => {
     if (error) {
@@ -106,7 +106,7 @@ app.delete("/submit2", (req, res) => {
   });
 });
 
-app.delete('postgres://udaendc20npfup:pe119b7c2a6aba549de38a2d3d07bc7c9340ed7f94166ff0316512b194883a611@c3cj4hehegopde.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/df3d3ojlucpms8/pills', (req, res) => {
+app.delete('/api/pills', (req, res) => {
   const id = req.params.id; // Extract the id from the URL
 
   // Assuming you're using a database library like Sequelize or raw SQL

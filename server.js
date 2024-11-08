@@ -1,6 +1,7 @@
 // Load HTTP module
 // const http = require("http");
 const express = require("express");
+const { Pool } = require('pg');
 const app = express();
 
 var jsdom = require("jsdom");
@@ -23,13 +24,9 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-const { Client } = require("pg");
-
-const connection = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+const connection = new Pool({
+  connectionString: process.env.DATABASE_URL || 'postgres://udaendc20npfup:pe119b7c2a6aba549de38a2d3d07bc7c9340ed7f94166ff0316512b194883a611@c3cj4hehegopde.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/df3d3ojlucpms8', // Add Heroku's DATABASE_URL here
+  ssl: { rejectUnauthorized: false }, // For Heroku SSL
 });
 
 connection.connect();
@@ -74,17 +71,15 @@ app.use(express.json());
 //   });
 // });
 
-app.get("/", (req, res) => {
-  const query = "select * from pills;";
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error("Error inserting data:", error);
-      res.status(500).send("Error inserting data");
-    } else {
-      console.log("Data retrieved successfully: ", results);
-      res.status(200).send(results);
-    }
-  });
+app.get('/', async (req, res) => {
+  try {
+    // Query the database
+    const result = await connection.query('SELECT * FROM pills');
+    res.json(result.rows); // Send the rows of data as JSON
+  } catch (error) {
+    console.error('Error querying the database', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 app.post("/submit1", (req, res) => {
@@ -107,10 +102,9 @@ app.delete("/submit2", (req, res) => {
 });
 
 app.delete('/', (req, res) => {
-  const id = req.params.id; // Extract the id from the URL
+  const id = req.params; // Extract the id from the URL
 
-  // Assuming you're using a database library like Sequelize or raw SQL
-  const query = 'DELETE FROM pills'; // Use your actual table name
+  const query = 'DELETE FROM pills';
 
   connection.query(query, [id], (error, results) => {
       if (error) {

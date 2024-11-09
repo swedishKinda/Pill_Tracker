@@ -37,7 +37,7 @@ app.post("/add", async (req, res) => {
   try {
     // Insert the new row into the table
     const result = await pool.query(
-      "INSERT INTO pills (name, amount) VALUES ('h', 5)",
+      'INSERT INTO pills (name, amount) VALUES ($1, $2)',
       [name, amount]
     );
 

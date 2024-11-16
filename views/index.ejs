@@ -23,7 +23,7 @@
 
       <section class="row center-xs">
         <div class="col-md-6 col-xs-12 mt-5 first-md last-xs">
-          <p><strong>Add medication and amount here</strong></p>
+          <p><strong>Add medication, amount, and doses per day here</strong></p>
           <form action="/add" method="POST">
             <div class="form-group">
               <input
@@ -42,10 +42,20 @@
                 placeholder="Amount"
                 required
               />
+              <input
+                class="form-control w-75 d-inline mt-3"
+                type="number"
+                id="doses_per_day"
+                name="doses_per_day"
+                placeholder="Doses per day"
+                required
+              />
             </div>
             <button class="mt-3 btn btn-primary" type="submit">Submit</button>
           </form>
-          <p class="mt-5"><strong>Delete medication by entering it’s name here</strong></p>
+          <p class="mt-5">
+            <strong>Delete medication by entering it’s name here</strong>
+          </p>
           <form action="/delete" method="POST">
             <div class="form-group">
               <input
@@ -71,6 +81,7 @@
                 <!-- Assuming your table has columns like 'id', 'name', 'age'. Modify accordingly -->
                 <th>Name</th>
                 <th>Amount</th>
+                <th>Dose per day</th>
               </tr>
             </thead>
             <tbody>
@@ -79,6 +90,7 @@
               <tr>
                 <td><%= row.name %></td>
                 <td><%= row.amount %></td>
+                <td><%= row.doses_per_day %></td>
               </tr>
               <% }); %>
             </tbody>

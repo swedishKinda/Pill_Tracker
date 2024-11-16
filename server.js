@@ -35,13 +35,13 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-  const { name, amount } = req.body;
+  const { name, amount, doses_per_day } = req.body;
 
   try {
     // Insert the new row into the table
     const result = await pool.query(
-      "INSERT INTO pills (name, amount) VALUES ($1, $2)",
-      [name, amount]
+      "INSERT INTO pills (name, amount, doses_per_day, last_updated) VALUES ($1, $2, $3, NOW())",
+      [name, amount, doses_per_day]
     );
 
     // console.log("New row added:", result.rows[0]);
